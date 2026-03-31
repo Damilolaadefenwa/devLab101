@@ -30,4 +30,4 @@ To turn the local dev back on look closely at your terminal path; if currently i
 
 ### Type npm run dev and press Enter.
 
-Then go inside your project folder first:
+Then go inside your project folder first.
