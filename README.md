@@ -1,6 +1,6 @@
 # devLab101
 
-This repo contains reusable UI interface projects built with React.js.
+This repo contains reusable UI interface projects built with React.js, Classic Css and TailwindCss.
 
 ## Getting Started with Vite + React
 
