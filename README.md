@@ -31,3 +31,14 @@ To turn the local dev back on look closely at your terminal path; if currently i
 ### Type npm run dev and press Enter.
 
 Then go inside your project folder first.
+
+### Type cd lesson01 and press Enter.
+then
+### npm run dev and press Enter.
+This website will load on http://localhost:5173 for Terminal- 1 lesson01 project.
+
+
+### Type cd lessonPracticals and press Enter.
+then
+### npm run dev and press Enter.
+This website will load on http://localhost:5174 for Terminal- 2 lessonPracticals project.
