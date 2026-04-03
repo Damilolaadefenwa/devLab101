@@ -7,6 +7,9 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
+  // My edit working
+  const name = "Damilola";
+
   return (
     <>
       <section id="center">
@@ -18,9 +21,9 @@ function App() {
         <div>
           <h1>Get started</h1>
           <p>
-            Edit <code>src/App.jsx</code> and save to see changes <code>HMR</code>
+            Edit <code>src/App.jsx</code> and save to see changes I made for testing <code>HMR</code>
           </p>
-        </div>
+        </div>Then go inside your project folder first:
         <button
           className="counter"
           onClick={() => setCount((count) => count + 1)}
@@ -28,6 +31,9 @@ function App() {
           Count is {count}
         </button>
       </section>
+
+      {/* My Edit working */}
+      <p>{10}</p>
 
       <div className="ticks"></div>
 
