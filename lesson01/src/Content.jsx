@@ -18,7 +18,6 @@ const Content = () => {
       </p>
       <button onClick={handleClick}>Click it</button>
     </main>
-
   )
 }
 
