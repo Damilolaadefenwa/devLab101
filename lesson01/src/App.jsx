@@ -1,13 +1,14 @@
-import Header from './Header'
-import Footer from './Footer'
+import Header from './Header.jsx'
+import Content from './Contents.jsx'
+import Footer from './Footer.jsx'
 
 function App() {
 
   return (
     <>
       <div className='App' >
-      
         <Header />
+        <Content />
         <Footer />
         
       </div>
