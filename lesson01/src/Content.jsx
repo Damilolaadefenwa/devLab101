@@ -16,12 +16,12 @@ const Content = () => {
   }
 
   const handleClick3 = (e) => {
-    console.log(e.target.innertext())
+    console.log(e.target.innerText)
   }
   
   return (
     <main>
-      <p>
+      <p onDoubleClick={handleClick}>
         Hello {handleNameChange()}!
       </p>
       <button onClick={handleClick}>Click it</button>
