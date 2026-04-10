@@ -1,19 +1,20 @@
+import ShowColor from "./ShowColor.jsx"
+import AddColor from "./AddColor.jsx"
 
-const Content = () => {
+{/* Dave-Gray Project Challenge */ }
+
+const Content = ({colorValue, setColorValue}) => {
   return (
-       <section className="flex min-h-screen flex-col items-center justify-center gap-12 bg-gray-900">
-      {/* Your Tailwind Badge */}
-      <div className="rounded-xl bg-gray-800 p-8 text-center shadow-lg">
-        <h1 className="mb-4 text-4xl font-bold text-blue-400">
-          Ready for Practice!
-        </h1>
-        <p className="text-lg text-white">
-          Tailwind is successfully installed.
-        </p>
-      </div>
-
-    </section>
-  )
+      <main className="flex flex-col items-center justify-center min-h-screen bg-amber-50">
+          <ShowColor
+            colorValue={colorValue}
+          />
+          <AddColor
+              colorValue={colorValue}
+              setColorValue={setColorValue}
+          /> 
+      </main>
+    )
 }
 
 export default Content
