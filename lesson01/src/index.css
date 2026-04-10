@@ -92,11 +92,17 @@ ul li::before {
   min-height: 48px;
   cursor: pointer;
   margin-right: 0.5rem;
+
+  /* This one line changes the checked background color instantly! */
+  accent-color: steelblue;
 }
+
 
 .item input[type="checkbox"]:focus + label {
   text-decoration: underline;
+  
 }
+
 
 .item > label{
   font-size: 0.75rem;

@@ -1,14 +1,23 @@
+/* At the begining of the Parent file is where you import
+or required as the term used in node.js the function from any 
+component into the Parent App file   */
+
 import Header from './Header.jsx'
+import SearchItem from './SearchItem.jsx'
 import AddItem from './AddItem.jsx'
 import Content from './Contents.jsx'
 import Footer from './Footer.jsx'
 import { useState } from 'react';
 
 function App() {
-  //This is the new-short form replacement
+  /* 1. DECLARE REACT USESTATE FOR DYNAMIC RESULT HERE */
+  //This is the new-short replacement for old-default-object and useState that was commented-out.
   const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppinglist')) || []);
-  //Declaring a useState for adding New-item for the Input Form
+  //Declaring a useState for adding New-item for the Add Form
   const [newItem, setNewItem] = useState('')
+  //Declaring a useState for searching item in the Search Form
+  const [search, setSearch] = useState('')
+
 
   // This was the formal Object hold default Items before replacing
   // it with the current state
@@ -29,6 +38,8 @@ function App() {
       item: "Item 3"
     }
   ]); */
+
+  /*2. DECLARE YOUR FUNCTION-METHOD/PROPS HERE*/
 
   //This function display/get the item set and store in the local storage
   const setAndSaveItems = (newItems) => {
@@ -68,6 +79,8 @@ function App() {
     setNewItem('');
   }
 
+  /*3. ADD YOUR FUNCTION COMPONENT & THEIR PROPERTY FOR PROPS DRILLING HERE */
+
   return (
     <>
       <div className='App' >
@@ -77,8 +90,12 @@ function App() {
           setNewItem={setNewItem}
           handleSubmit={handleSubmit}
         />
+        <SearchItem
+          search={search}
+          setSearch={setSearch}
+        />
         <Content
-          items={items}
+          items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))}
           handleCheck={handleCheck}
           handleDelete={handleDelete}
         />
