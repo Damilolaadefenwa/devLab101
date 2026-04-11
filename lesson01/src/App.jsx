@@ -7,7 +7,7 @@ import SearchItem from './SearchItem.jsx'
 import AddItem from './AddItem.jsx'
 import Content from './Contents.jsx'
 import Footer from './Footer.jsx'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   /* 1. DECLARE REACT USESTATE FOR DYNAMIC RESULT HERE */
@@ -17,7 +17,6 @@ function App() {
   const [newItem, setNewItem] = useState('')
   //Declaring a useState for searching item in the Search Form
   const [search, setSearch] = useState('')
-
 
   // This was the formal Object hold default Items before replacing
   // it with the current state
@@ -40,12 +39,11 @@ function App() {
   ]); */
 
   /*2. DECLARE YOUR FUNCTION-METHOD/PROPS HERE*/
-
+  //Declaring useEffect Hook.
   //This function display/get the item set and store in the local storage
-  const setAndSaveItems = (newItems) => {
-    setItems(newItems);
-    localStorage.setItem('shoppinglist', JSON.stringify(newItems));
-  }
+  useEffect(() => {
+    localStorage.setItem('shoppinglist', JSON.stringify(items));
+  }, [items])
 
   //Defining the what the addItem function will do
   //Which is to add new item to the form
@@ -53,21 +51,21 @@ function App() {
     const id = items.length ? items[items.length - 1].id + 1 : 1; 
     const myNewItem = { id, checked: false, item };
     const listItems = [...items, myNewItem];
-    setAndSaveItems(listItems);
+    setItems(listItems);
   }
 
   //This function is used to check-mark the item in the grocery list
   const handleCheck = (id) => {
     /* console.log(`key: ${id}`) */
     const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
-    setAndSaveItems(listItems);
+    setItems(listItems);
   }
 
   //This function used to delete the grocery list item
   const handleDelete = (id) => {
     /* console.log(id); */
     const listItems = items.filter((item) => item.id !== id);
-    setAndSaveItems(listItems);
+    setItems(listItems);
   }
 
   //This function handle the submit action of the input form.
