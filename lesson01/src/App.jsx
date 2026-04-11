@@ -39,7 +39,7 @@ function App() {
   ]); */
 
   /*2. DECLARE YOUR FUNCTION-METHOD/PROPS HERE*/
-  //Declaring useEffect Hook.
+  //Declaring useEffect Hook to effecting load data in the function below
   //This function display/get the item set and store in the local storage
   useEffect(() => {
     localStorage.setItem('shoppinglist', JSON.stringify(items));
