@@ -33,10 +33,10 @@ const FetchChallenge = () => {
 
    // 4. Displaying result to the Browser.
     return (
-        <div className='p-4'> 
+        <main> 
             <Form reqType={reqType} setReqType={setReqType} />
             <List items={items} />
-        </div>
+        </main>
     )
 }
         
