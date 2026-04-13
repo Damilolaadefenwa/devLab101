@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Form from './Form.jsx';
-import List from './List.jsx';
+// import List from './List.jsx';
+import Table from './Table.jsx';
 
 
 const FetchChallenge = () => {
@@ -35,7 +36,8 @@ const FetchChallenge = () => {
     return (
         <main> 
             <Form reqType={reqType} setReqType={setReqType} />
-            <List items={items} />
+            {/* <List items={items} /> */}
+            <Table items={items} />
         </main>
     )
 }

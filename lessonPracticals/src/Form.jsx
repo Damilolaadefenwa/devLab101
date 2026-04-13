@@ -1,7 +1,7 @@
 
 const Form = ({reqType, setReqType}) => {
   return (
-      <form onSubmit={(e) => e.preventDefault()} className=" flex w-full flex-1" >
+      <form onSubmit={(e) => e.preventDefault()} className="sticky top-0 z-10 w-full flex bg-white shadow-sm pb-2" >
            <button 
                 // We use backticks ` ` here to mix standard Tailwind classes with conditional ones!
                 className={`w-full p-4 text-lg font-medium transition-colors ${
