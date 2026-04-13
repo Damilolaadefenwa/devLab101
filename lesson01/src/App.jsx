@@ -28,7 +28,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   // This was the formal Object hold default Items before replacing
-  // it with the current state
+  // it with the current state and moving it into JSON DB.
   /* const [items, setItems] = useState([
     {
       id: 1,
@@ -52,7 +52,10 @@ function App() {
   /* useEffect(() => {
     localStorage.setItem('shoppinglist', JSON.stringify(items));
   }, [items]) */
-  //B).This function display/get the item set and store in the local storage. Then change to using the hook-useEffect together with Async-Await to fetch the data from local json-db like real MongoDB could do.We also set a timeout of 2000s to display isloading message while awaiting the restful API 
+  //B).This function display/get the item set and store in the local storage. 
+  // Then change to using the hook-useEffect together with Async-Await to fetch 
+  // the data from local json-db like real MongoDB could do.We also set a timeout of 2000s to 
+  // display isloading message while awaiting the restful API 
   useEffect(() => {
     
     const fetchItems = async () => {
@@ -75,8 +78,9 @@ function App() {
     
   }, [])
 
-  //Defining the what the addItem function will do
-  //Which is to add new item to the form
+  //A). Defining the what the addItem function will do
+  //Which is to add new item to the form, then upgraded to 
+  //using async await when the data has been moved for JSON-db using API
   // 1. Add 'async' right before the parentheses
   const addItem = async (item) => { 
     const id = items.length ? items[items.length - 1].id + 1 : 1; 
@@ -100,7 +104,8 @@ function App() {
     if (result) setFetchError(result);
   }
 
-  //This function is used to check-mark the item in the grocery list
+  //B). This function is used to check-mark the item in the grocery list then upgraded to 
+  // using async await when the data has been moved for JSON-db using API
   const handleCheck = async (id) => {
     /* console.log(`key: ${id}`) */
     const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
@@ -120,7 +125,8 @@ function App() {
     if (result) setFetchError(result);
   }
 
-  //This function used to delete the grocery list item
+  //C). This function used to delete the grocery list item then upgraded to 
+  // using async await when the data has been moved for JSON-db using API
   const handleDelete = async (id) => {
     /* console.log(id); */
     const listItems = items.filter((item) => item.id !== id);
@@ -133,7 +139,7 @@ function App() {
     if (result) setFetchError(result);
   }
 
-  //This function handle the submit action of the input form.
+  //D) This function handle the submit action of the input form.
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!newItem) return;
