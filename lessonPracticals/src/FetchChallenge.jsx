@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import Form from './Form.jsx';
+import List from './List.jsx';
+
 
 const FetchChallenge = () => {
     // 1. Use one base URL insteading of previous Three
@@ -30,66 +33,10 @@ const FetchChallenge = () => {
 
    // 4. Displaying result to the Browser.
     return (
-        <> 
-            <header>
-                <nav>
-                    {/* flex: put them in a row. w-full: takes up whole screen */}
-                    <ul className="flex w-full">
-                        {/* flex-1: making this list item take up exactly 1/3 of the space */}
-                        <li className="flex-1">
-                            <button 
-                                // We use backticks ` ` here to mix standard Tailwind classes with conditional ones!
-                                className={`w-full p-4 text-lg font-medium transition-colors ${
-                                    reqType === 'users' 
-                                        ? 'bg-black text-white' 
-                                        : 'bg-gray-100 text-black border border-gray-300 hover:bg-gray-200'
-                                }`}
-                                onClick={() => setReqType('users')}
-                            >
-                                users
-                            </button>
-                        </li> 
-                        
-                        <li className="flex-1">
-                            <button 
-                                className={`w-full p-4 text-lg font-medium transition-colors ${
-                                    reqType === 'posts' 
-                                        ? 'bg-black text-white' 
-                                        : 'bg-gray-100 text-black border border-gray-300 hover:bg-gray-200'
-                                }`}
-                                onClick={() => setReqType('posts')}
-                            >
-                                posts
-                            </button>
-                        </li> 
-                        
-                        <li className="flex-1">
-                            <button 
-                                className={`w-full p-4 text-lg font-medium transition-colors ${
-                                    reqType === 'comments' 
-                                        ? 'bg-black text-white' 
-                                        : 'bg-gray-100 text-black border border-gray-300 hover:bg-gray-200'
-                                }`}
-                                onClick={() => setReqType('comments')}
-                            >
-                                comments
-                            </button>
-                        </li> 
-                    </ul>     
-                </nav>
-            </header>
-            
-            {/* Added a little padding to the main area so the text doesn't touch the edges */}
-            <main className="p-4"> 
-                <ul className="space-y-4">
-                    {items.map(item => (
-                        <li key={item.id} className="text-gray-800">
-                            {JSON.stringify(item)}
-                        </li>
-                    ))}
-                </ul>
-            </main>
-        </>
+        <div className='p-4'> 
+            <Form reqType={reqType} setReqType={setReqType} />
+            <List items={items} />
+        </div>
     )
 }
         
