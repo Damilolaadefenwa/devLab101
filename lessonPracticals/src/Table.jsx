@@ -2,7 +2,7 @@ import Row from './Row.jsx';
 
 const Table = ({items}) => {
   return (
-        <div className="w-full overflow-y-auto pt-13">
+        <div className="w-full overflow-y-auto pt-10">
           <table className='w-full text-left border-collapse' >
               <tbody>
                   {items.map(item => (
