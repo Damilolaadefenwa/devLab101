@@ -23,9 +23,8 @@ function ReactRouter() {
             <About />
             <Missing />
             <Footer />
-
         </div>
     )
 }
 
-export default ReactRouter
+export default ReactRouter;
