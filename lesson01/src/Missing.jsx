@@ -2,7 +2,7 @@
 const Missing = () => {
   return (
         <main>
-            <h1>Header</h1>
+            Missing
         </main>
     )
 }
