@@ -8,9 +8,11 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start-db": "json-server -p 3500 -w data/db.json"
+    "start-db": "json-server -p 3500 -w data/db.json",
+    "start-db2": "json-server -p 3500 -w data/db2.json"
   },
   "dependencies": {
+    "axios": "^1.15.0",
     "date-fns": "^4.1.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
