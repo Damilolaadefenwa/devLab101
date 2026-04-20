@@ -11,7 +11,7 @@ import Missing from './Missing.jsx';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import api from './api/posts.jsx';
+import api from './api/posts.js';
 
 
 function ReactRouter() {
