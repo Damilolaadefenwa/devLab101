@@ -5,6 +5,7 @@ import Footer from './RFooter.jsx';
 import Home from './Home.jsx';
 import NewPost from './NewPost.jsx';
 import PostPage from './PostPage.jsx';
+import EditPost from './EditPost.jsx';
 import About from './About.jsx';
 import Missing from './Missing.jsx';
 import { Route, Switch, useHistory } from 'react-router-dom';
@@ -19,8 +20,12 @@ function ReactRouter() {
     const [searchResults, setSearchResults] = useState([]);
     const [postTitle, setPostTitle] = useState('');
     const [postBody, setPostBody] = useState('');
+    const [editTitle, setEditTitle] = useState('');
+    const [editBody, setEditBody] = useState('');
     const history = useHistory();
 
+    // The Using the Axion Fetch Operation
+    // Replacing the Normal Fetch-Method
     useEffect(() => {
         const fetchPosts = async () => {
         try {
@@ -51,6 +56,7 @@ function ReactRouter() {
     }, [posts, search])
 
 
+    // The Submit Post Operation
     const handleSubmit = async (e) => {
         e.preventDefault();
         const id = posts.length ? String(Number(posts[posts.length - 1].id) + 1) : "1";
@@ -68,13 +74,34 @@ function ReactRouter() {
         }
     }
 
+    //The CRUD Edit Operation
+    const handleEdit = async (id) => {
+        const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+        const updatedPost = { id, title: editTitle, datetime, body: editBody };
+        try {
+            const response = await api.put(`/posts/${id}`, updatedPost);
+            setPosts(posts.map(post => post.id === id ? { ...response.data } : post));
+            setEditTitle('');
+            setEditBody('');
+            history.push('/');
+        } catch (err) {
+            console.log(`Error: ${err.message}`);
+        }
+    }
 
-    const handleDelete = (id) => {
-        const postsList = posts.filter(post => post.id !== id);
-        setPosts(postsList);
-        history.push('/');
+    // The CRUD Delete Operation
+    const handleDelete = async (id) => {
+        try {
+            await api.delete(`/posts/${id}`);
+            const postsList = posts.filter(post => post.id !== id);
+            setPosts(postsList);
+            history.push('/');
+        } catch (err) {
+            console.log(`Error: ${err.message}`); 
+        }
     }
     
+
     return (
         <div className='App'>
             <Header title={'React JS Blog'}/>
@@ -91,6 +118,16 @@ function ReactRouter() {
                         setPostTitle={setPostTitle}
                         postBody={postBody}
                         setPostBody={setPostBody}
+                    />
+                </Route>
+                <Route path='/edit/:id'>
+                    <EditPost
+                        posts={posts}
+                        handleEdit={handleEdit}
+                        editTitle={editTitle}
+                        setEditTitle={setEditTitle}
+                        editBody={editBody}
+                        setEditBody={setEditBody}
                     />
                 </Route>
                 <Route path='/post/:id'>
