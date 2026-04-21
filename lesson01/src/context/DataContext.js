@@ -1,24 +1,13 @@
-/* LEARNING REACT ROUTER FOR FULL APPLICATION */
-import Header from './RHeader.jsx';
-import Nav from './Nav.jsx';
-import Footer from './RFooter.jsx';
-import Home from './Home.jsx';
-import NewPost from './NewPost.jsx';
-import PostPage from './PostPage.jsx';
-import EditPost from './EditPost.jsx';
-import About from './About.jsx';
-import Missing from './Missing.jsx';
-import { Route, Switch, useHistory } from 'react-router-dom';
-import { useState, useEffect, use } from 'react';
+import { createContext, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
-import api from './api/posts.js';
-import useWindowSize from './hooks/useWindowSize.js';
-import useAxiosFetch from './hooks/useAxiosFetch.js';
-import { DataProvider } from './context/DataContext.js';
+import api from '../api/posts.js';
+import useWindowSize from '../hooks/useWindowSize.js';
+import useAxiosFetch from '../hooks/useAxiosFetch.js';
 
+const DataContext = createContext({});
 
-
-function ReactRouter() {
+export const DataProvider = ({ children }) => {
     const [posts, setPosts] = useState([]);
     const [search, setSearch ] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -45,7 +34,6 @@ function ReactRouter() {
 
             setSearchResults(filteredResults.reverse());
     }, [posts, search])
-
 
     // The Submit Post Operation
     const handleSubmit = async (e) => {
@@ -91,50 +79,15 @@ function ReactRouter() {
             console.log(`Error: ${err.message}`); 
         }
     }
-    
+        
 
     return (
-        <div className='App'>
-            <DataProvider>
-                <Header title={'React JS Blog'}  />
-                <Nav />
-                <Switch>
-                    <Route exact path='/'>
-                        <Home
-                            posts={searchResults}
-                            fetchError={fetchError}
-                            isLoading={isLoading}
-                        />
-                    </Route>
-                    <Route exact path='/post'>
-                        <NewPost
-                            handleSubmit={handleSubmit}
-                            postTitle={postTitle}
-                            setPostTitle={setPostTitle}
-                            postBody={postBody}
-                            setPostBody={setPostBody}
-                        />
-                    </Route>
-                    <Route path='/edit/:id'>
-                        <EditPost
-                            posts={posts}
-                            handleEdit={handleEdit}
-                            editTitle={editTitle}
-                            setEditTitle={setEditTitle}
-                            editBody={editBody}
-                            setEditBody={setEditBody}
-                        />
-                    </Route>
-                    <Route path='/post/:id'>
-                        <PostPage posts={posts} handleDelete={handleDelete}/>
-                    </Route>
-                    <Route path='/about' component={About} />
-                    <Route path='*' component={Missing}/>
-                </Switch>
-                <Footer />
-            </DataProvider>    
-        </div>
+        <DataContext.Provider value={{
+           width
+        }}>
+            {children}
+        </DataContext.Provider>
     )
 }
 
-export default ReactRouter;
+export default DataContext;
