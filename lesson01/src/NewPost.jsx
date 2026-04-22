@@ -1,7 +1,12 @@
+import { useContext } from "react";
+import DataContext from "./context/DataContext";
 
-const NewPost = ({
-  handleSubmit, postTitle, setPostTitle, postBody, setPostBody
-}) => {
+
+const NewPost = () => {
+  
+  //This used to be in the destructured Anonimous function as a props before useContext
+  const { handleSubmit, postTitle, setPostTitle, postBody, setPostBody } = useContext(DataContext);
+  
   return (
     <main className="NewPost">
       <h2>New Post</h2>

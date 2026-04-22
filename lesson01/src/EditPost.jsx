@@ -1,12 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
+import DataContext from "./context/DataContext";
 
 
-const EditPost = ({
-    posts, handleEdit, editBody, setEditBody, editTitle, setEditTitle
-}) => {
+const EditPost = () => {
+    //This used to be in the destructured Anonimous function as a props before useContext
+    const {  posts, handleEdit, editBody, setEditBody, editTitle, setEditTitle } = useContext(DataContext);
+
     const { id } = useParams();
     const post = posts.find(post => (post.id).toString() === id);
+
 
     useEffect(() => {
         if (post) {

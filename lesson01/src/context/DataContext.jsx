@@ -18,8 +18,7 @@ export const DataProvider = ({ children }) => {
     const history = useHistory();
     const { width } = useWindowSize();
 
-    //using the custom hook fetchAxios
-    // The Using the Axion Fetch Operation
+
     // Replacing the Normal Fetch-Method
     const { data, fetchError, isLoading } = useAxiosFetch('http://localhost:3500/posts');
 
@@ -32,7 +31,7 @@ export const DataProvider = ({ children }) => {
             ((post.body).toLowerCase()).includes(search.toLowerCase())
             || ((post.title).toLowerCase()).includes(search.toLowerCase()));
 
-            setSearchResults(filteredResults.reverse());
+        setSearchResults(filteredResults.reverse());
     }, [posts, search])
 
     // The Submit Post Operation
@@ -83,7 +82,11 @@ export const DataProvider = ({ children }) => {
 
     return (
         <DataContext.Provider value={{
-           width
+            width, search, setSearch,
+            searchResults, fetchError, isLoading,
+            handleSubmit, postTitle, setPostTitle, postBody, setPostBody,
+            posts, handleEdit, editBody, setEditBody, editTitle, setEditTitle,
+            handleDelete
         }}>
             {children}
         </DataContext.Provider>
