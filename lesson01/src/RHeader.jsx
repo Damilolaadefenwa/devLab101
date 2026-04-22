@@ -1,12 +1,10 @@
 import { FaLaptop, FaTabletAlt, FaMobileAlt} from "react-icons/fa";
-// import { useContext } from "react";
-// import DataContext from "./context/DataContext";
-import useWindowSize from "../hooks/useWindowSize";
+import useWindowSize from "./hooks/useWindowSize.js";
 
 const Header = ({ title }) => {
   
-  //This used to be in the destructured Anonimous function as a props before useContext
-  const { width } = useContext(DataContext);
+  //This used to be in the destructured Anonimous function as a props before useContext then change to useWindowSize
+  const { width } = useWindowSize();
   
   return (
     <header className="Header">
