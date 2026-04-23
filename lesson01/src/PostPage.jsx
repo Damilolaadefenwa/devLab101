@@ -1,17 +1,29 @@
 import { useParams, Link, useHistory } from "react-router-dom";
-import { useContext } from "react";
+import { useStoreState, useStoreActions } from 'easy-peasy';
+/* import { useContext } from "react";
 import api from './api/posts.js';
-import DataContext from "./context/DataContext";
+import DataContext from "./context/DataContext"; */
 
 const PostPage = () => {
+    const { id } = useParams();
+    const history = useHistory();
+    const deletePost = useStoreActions((actions) => actions.deletePost);
+    const getPostById = useStoreState((state) => state.getPostById);
+    const post = getPostById(id);
+
+    const handleDelete = (id) => {
+        deletePost(id);
+        history.push('/');
+    }
+    
     //This used to be in the destructured Anonimous function as a props before useContext
-    const { posts, setPosts } = useContext(DataContext);
+    /* const { posts, setPosts } = useContext(DataContext);
     const history = useHistory();
     const { id } = useParams();
-    const post = posts.find(post => (post.id).toString() === id);
+    const post = posts.find(post => (post.id).toString() === id); */
     
      // The CRUD Delete Operation
-    const handleDelete = async (id) => {
+    /* const handleDelete = async (id) => {
         try {
             await api.delete(`/posts/${id}`);
             const postsList = posts.filter(post => post.id !== id);
@@ -20,7 +32,7 @@ const PostPage = () => {
         } catch (err) {
             console.log(`Error: ${err.message}`); 
         }
-    }
+    } */
 
     return (
         <main className="PostPage">

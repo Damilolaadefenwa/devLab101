@@ -1,20 +1,41 @@
-import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { format } from 'date-fns';
-import api from './api/posts.js';
-import DataContext from "./context/DataContext";
+import { useStoreState, useStoreActions } from 'easy-peasy';
+// import { useState, useContext } from "react";
+// import api from './api/posts.js';
+// import DataContext from "./context/DataContext";
 
 
 const NewPost = () => {
-  const [postTitle, setPostTitle] = useState('');
+  const history = useHistory();
+
+  const posts = useStoreState((state) => state.posts);
+  const postTitle = useStoreState((state) => state.postTitle);
+  const postBody = useStoreState((state) => state.postBody);
+
+  const savePost = useStoreActions((actions) => actions.savePost);
+  const setPostTitle = useStoreActions((actions) => actions.setPostTitle);
+  const setPostBody = useStoreActions((actions) => actions.setPostBody);
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
+    const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+    const newPost = { id, title: postTitle, datetime, body: postBody };
+    savePost(newPost);
+    history.push('/');
+  }
+
+  /* const [postTitle, setPostTitle] = useState('');
   const [postBody, setPostBody] = useState('');
   //This used to be in the destructured Anonimous function as a props before useContext
   const { posts, setPosts } = useContext(DataContext);
-  const history = useHistory();
+  const history = useHistory(); */
 
   
   // The Submit Post Operation
-  const handleSubmit = async (e) => {
+  /* const handleSubmit = async (e) => {
     e.preventDefault();
     const id = posts.length ? String(Number(posts[posts.length - 1].id) + 1) : "1";
     const datetime = format(new Date(), 'MMMM dd, yyyy pp');
@@ -29,7 +50,7 @@ const NewPost = () => {
     } catch (err) {
       console.log(`Error: ${err.message}`); 
     }
-  }
+  } */
 
   return (
     <main className="NewPost">

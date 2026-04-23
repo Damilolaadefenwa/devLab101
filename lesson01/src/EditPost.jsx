@@ -1,18 +1,33 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect } from "react";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { format } from 'date-fns';
-import api from './api/posts.js';
-import DataContext from "./context/DataContext";
+import { useStoreState, useStoreActions } from 'easy-peasy';
+
+/* import api from './api/posts.js';
+import DataContext from "./context/DataContext"; */
 
 
 const EditPost = () => {
-    const [editTitle, setEditTitle] = useState('');
+    const history = useHistory();
+    const { id } = useParams();
+
+    const editTitle = useStoreState((state) => state.editTitle);
+    const editBody = useStoreState((state) => state.editBody);
+
+    const editPost = useStoreActions((actions) => actions.editPost);
+    const setEditTitle = useStoreActions((actions) => actions.setEditTitle);
+    const setEditBody = useStoreActions((actions) => actions.setEditBody);
+
+    const getPostById = useStoreState((state) => state.getPostById);
+    const post = getPostById(id);
+    
+    /* const [editTitle, setEditTitle] = useState('');
     const [editBody, setEditBody] = useState('');
     //This used to be in the destructured Anonimous function as a props before useContext
     const { posts, setPosts } = useContext(DataContext);
     const history = useHistory();
     const { id } = useParams();
-    const post = posts.find(post => (post.id).toString() === id);
+    const post = posts.find(post => (post.id).toString() === id); */
 
 
     useEffect(() => {
@@ -22,8 +37,15 @@ const EditPost = () => {
         }
     }, [post, setEditTitle, setEditBody])
 
+
+    const handleEdit = (id) => {
+        const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+        const updatedPost = { id, title: editTitle, datetime, body: editBody };
+        editPost(updatedPost);
+        history.push(`/post/${id}`);
+    }
     //The CRUD Edit Operation
-    const handleEdit = async (id) => {
+   /*  const handleEdit = async (id) => {
         const datetime = format(new Date(), 'MMMM dd, yyyy pp');
         const updatedPost = { id, title: editTitle, datetime, body: editBody };
         try {
@@ -35,7 +57,7 @@ const EditPost = () => {
         } catch (err) {
             console.log(`Error: ${err.message}`);
         }
-    }
+    } */
 
 
   return (

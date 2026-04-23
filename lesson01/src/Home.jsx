@@ -1,11 +1,13 @@
 import Feed from './Feed.jsx';
-import { useContext } from "react";
-import DataContext from "./context/DataContext";
+import { useStoreState } from 'easy-peasy';
+/* import { useContext } from "react";
+import DataContext from "./context/DataContext"; */
 
-const Home = () => {
-  
+const Home = ({ isLoading, fetchError }) => {
+  const searchResults = useStoreState((state) => state.searchResults);
+
   //This used to be in the destructured Anonimous function  before useContext
-  const { searchResults, fetchError, isLoading } = useContext(DataContext);
+  // const { searchResults, fetchError, isLoading } = useContext(DataContext);
   
   return (
     <main className="Home">
